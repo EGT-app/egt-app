@@ -609,7 +609,20 @@ select.fi option{background:var(--bg2);color:var(--text)}
       <div class="det-sub" id="detSub"></div>
     </div>
     <div class="det-tabs" id="detTabs"></div>
-    <div class="det-body" id="detBody"></div>
+    <div id="od-panel-fixed" style="display:none;padding:10px 13px 0">
+  <div style="background:#1a1f2e;border:1px solid rgba(255,107,43,.3);border-radius:10px;padding:12px;margin-bottom:8px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <span style="font-size:18px">☁️</span>
+      <div style="flex:1">
+        <div style="font-size:12px;font-weight:600;color:#fff">Synchronisation OneDrive EGT</div>
+        <div id="od-status-indicator" style="font-size:10px;color:rgba(255,255,255,.5);margin-top:1px">○ Non connecté</div>
+      </div>
+    </div>
+    <div id="od-status-msg" style="font-size:11px;color:rgba(255,255,255,.5);min-height:14px;margin-bottom:8px"></div>
+    <button id="od-connect-btn" onclick="odConnect()" style="padding:7px 14px;background:#FF6B2B;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;width:100%">☁️ Connecter OneDrive EGT</button>
+  </div>
+</div>
+<div class="det-body" id="detBody"></div>
   </div>
 
   <!-- MODAL -->
@@ -1865,11 +1878,19 @@ function openDetail(id,initialTab){
   dv.classList.add('open');
   dv.style.display='flex';
   currentTab=startTab;renderDetailTab(startTab);
+  // Afficher/masquer panneau OneDrive
+  const odp2 = document.getElementById('od-panel-fixed');
+  if(odp2) odp2.style.display = (startTab==='docs') ? 'block' : 'none';
+  if(startTab==='docs') setTimeout(odUpdateUI, 100);
 }
 
 function closeDetail(){
   window.currentChantier=null;const d=document.getElementById('detailView'); d.classList.remove('open'); d.style.display=''; const nav=document.getElementById('bottomNav'); if(nav) nav.style.display='flex'; nav.style.visibility='visible';}
-function switchTab(tab,el){document.querySelectorAll('.dtab').forEach(t=>t.classList.remove('active'));el.classList.add('active');currentTab=tab;renderDetailTab(tab)}
+function switchTab(tab,el){
+  // Afficher/masquer panneau OneDrive selon l'onglet
+  const odp = document.getElementById('od-panel-fixed');
+  if(odp) odp.style.display = (tab==='docs') ? 'block' : 'none';
+  odUpdateUI();document.querySelectorAll('.dtab').forEach(t=>t.classList.remove('active'));el.classList.add('active');currentTab=tab;renderDetailTab(tab)}
 
 function renderDetailTab(tab){
   const c=currentChantier||window.currentChantier;
