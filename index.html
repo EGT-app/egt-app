@@ -2,20 +2,17 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>E-tech · EGT — Gérez. Tracez. Performez.</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   /* E-tech Dark Theme — EGT */
-  --bg:#0A0C10;--bg2:#111318;--bg3:#181C23;--bg4:#1E2330;
+  --bg:#130013;--bg2:#1E001E;--bg3:#2A0A2A;--bg4:#361436;
   --line:#ffffff0f;--line2:#ffffff1a;--line3:#ffffff2a;
   /* Accent orange EGT */
-  --accent:#FF6B2B;--accent2:#E8531A;
-  --accent-lt:rgba(255,107,43,.14);--accent-lt2:rgba(255,107,43,.07);--accent-bd:rgba(255,107,43,.32);
+  --accent:#965A96;--accent2:#A55AA5;
+  --accent-lt:rgba(150,90,150,.18);--accent-lt2:rgba(150,90,150,.09);--accent-bd:rgba(150,90,150,.35);
   /* Sémantiques */
   --green:#00C47A;--green-lt:rgba(0,196,122,.14);
   --red:#FF4455;--red-lt:rgba(255,68,85,.14);
@@ -40,7 +37,7 @@ textarea{resize:none}
 .shell{display:flex;flex-direction:column;min-height:100dvh;width:100%;max-width:480px;margin:0 auto;background:var(--bg2);box-shadow:var(--shl);position:relative;overflow:hidden;padding-bottom:72px}
 h2,.modal-title,.det-title,.login-title{font-family:Rajdhani,sans-serif!important;letter-spacing:.3px}
 .sv,.veh-sv,.veh-plate,.ocr-val,.prog-lbl{font-family:JetBrains Mono,monospace!important}
-body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-image:linear-gradient(rgba(255,107,43,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,107,43,.015) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-image:linear-gradient(rgba(150,90,150,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(150,90,150,.015) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0}
 
 /* TOPBAR */
 .topbar{background:var(--bg3);border-bottom:1px solid var(--line2);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
@@ -101,7 +98,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-
 
 /* PILLS & BADGES */
 .pill{font-size:10px;padding:2px 7px;border-radius:7px;display:inline-block;white-space:nowrap}
-.p-blue{background:rgba(255,107,43,.1);color:var(--accent)}
+.p-blue{background:rgba(150,90,150,.1);color:var(--accent)}
 .p-green{background:var(--green-lt);color:var(--green)}
 .p-amber{background:var(--amber-lt);color:var(--amber)}
 .p-red{background:var(--red-lt);color:var(--red)}
@@ -109,7 +106,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-
 .p-purple{background:var(--purple-lt);color:var(--purple)}
 .badge{font-size:9px;padding:2px 7px;border-radius:9px;font-weight:600;white-space:nowrap;flex-shrink:0}
 .b-green{background:var(--green-lt);color:var(--green)}
-.b-blue{background:rgba(255,107,43,.1);color:var(--accent)}
+.b-blue{background:rgba(150,90,150,.1);color:var(--accent)}
 .b-red{background:var(--red-lt);color:var(--red)}
 .b-gray{background:var(--g2);color:var(--g5)}
 .b-amber{background:var(--amber-lt);color:var(--amber)}
@@ -122,9 +119,9 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-
 .detail{position:absolute;top:0;left:0;right:0;bottom:58px;background:var(--white);z-index:100;display:none;flex-direction:column;box-shadow:var(--shl)}
 .detail.open{display:flex}
 .det-top{background:var(--bg3);border-bottom:1px solid var(--line2);padding:11px 14px;flex-shrink:0}
-.det-back{background:none;border:none;color:rgba(255,107,43,.6);font-size:12px;padding:0;margin-bottom:7px;display:flex;align-items:center;gap:3px}
+.det-back{background:none;border:none;color:rgba(150,90,150,.6);font-size:12px;padding:0;margin-bottom:7px;display:flex;align-items:center;gap:3px}
 .det-title{font-size:15px;font-weight:600;color:#fff}
-.det-sub{font-size:11px;color:rgba(255,107,43,.7);margin-top:2px;font-family:JetBrains Mono,monospace}
+.det-sub{font-size:11px;color:rgba(150,90,150,.7);margin-top:2px;font-family:JetBrains Mono,monospace}
 .det-tabs{display:flex;border-bottom:1px solid var(--line2);background:var(--bg3);overflow-x:auto;flex-shrink:0;scrollbar-width:none}
 .det-tabs::-webkit-scrollbar{display:none}
 .dtab{padding:9px 12px;font-size:11px;font-weight:500;color:var(--text2);border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;cursor:pointer}
@@ -140,7 +137,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-
 /* FILE / DOC ROW */
 .file-row{display:flex;align-items:center;gap:8px;padding:9px 10px;background:var(--bg3);border:1px solid var(--line2);border-radius:var(--rs);margin-bottom:5px}
 .file-ico{width:30px;height:30px;border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
-.fi-pdf{background:var(--red-lt)}.fi-xls{background:var(--green-lt)}.fi-doc{background:rgba(255,107,43,.07)}.fi-img{background:var(--amber-lt)}.fi-lock{background:var(--g2)}
+.fi-pdf{background:var(--red-lt)}.fi-xls{background:var(--green-lt)}.fi-doc{background:rgba(150,90,150,.07)}.fi-img{background:var(--amber-lt)}.fi-lock{background:var(--g2)}
 .file-name{font-size:12px;font-weight:500;flex:1}
 .file-meta{font-size:10px;color:var(--text2);margin-top:1px}
 
@@ -169,7 +166,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-
 /* ÉQUIPE */
 .tech-card{margin:0 12px 8px;border:1px solid var(--line2);border-radius:var(--r);padding:11px 13px;display:flex;gap:10px;align-items:flex-start}
 .tech-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0}
-.ta-blue{background:rgba(255,107,43,.12);color:var(--accent)}
+.ta-blue{background:rgba(150,90,150,.12);color:var(--accent)}
 .ta-teal{background:var(--green-lt);color:var(--green)}
 .ta-amber{background:var(--amber-lt);color:var(--amber)}
 .ta-gray{background:var(--g2);color:var(--g5)}
@@ -227,7 +224,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-
 .alert-box{margin:0 12px 8px;padding:9px 12px;border-radius:var(--r);border:1px solid}
 .alert-error{background:var(--red-lt);border-color:#F5B7B1}
 .alert-warn{background:var(--amber-lt);border-color:#F9C971}
-.alert-info{background:rgba(255,107,43,.08);border-color:rgba(255,107,43,.25)}
+.alert-info{background:rgba(150,90,150,.08);border-color:rgba(150,90,150,.25)}
 .alert-h{font-size:11px;font-weight:600;margin-bottom:3px}
 .alert-error .alert-h{color:var(--red)}
 .alert-warn .alert-h{color:var(--amber)}
@@ -235,7 +232,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-
 .alert-t{font-size:11px}
 .alert-error .alert-t{color:#922B21}
 .alert-warn .alert-t{color:#7A5000}
-.alert-info .alert-t{color:rgba(255,107,43,.8)}
+.alert-info .alert-t{color:rgba(150,90,150,.8)}
 
 /* MODAL */
 .modal-ov{position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);z-index:200;display:none;align-items:flex-end}
@@ -245,7 +242,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-
 .fg{margin-bottom:12px}
 .fl{font-size:10px;font-weight:600;color:var(--g4);margin-bottom:5px;display:block;text-transform:uppercase;letter-spacing:1px;font-family:JetBrains Mono,monospace}
 .fi{width:100%;border:1px solid var(--line2);border-radius:var(--rs);padding:8px 11px;font-size:13px;color:var(--text);background:var(--bg2)}
-.fi:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(255,107,43,.15)}
+.fi:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(150,90,150,.15)}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .m-actions{display:flex;gap:8px;margin-top:8px}
 .btn-cancel{flex:0 0 72px;padding:10px;background:var(--bg2);border:1px solid var(--line2);border-radius:var(--rs);font-size:13px;color:var(--text2)}
@@ -273,7 +270,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-
 .profile-btn .p-icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;overflow:hidden;padding:0!important}
 .profile-btn .p-name{font-size:13px;font-weight:600}
 .profile-btn .p-role{font-size:10px;opacity:.7}
-.pb-directeur{background:rgba(255,107,43,.12);border:1px solid rgba(255,107,43,.2)}
+.pb-directeur{background:rgba(150,90,150,.12);border:1px solid rgba(150,90,150,.2)}
 .pb-directeur .p-icon{background:var(--accent);color:#fff}
 .pb-directeur .p-name{color:#fff}
 .pb-directeur .p-role{color:#F9C99A}
@@ -378,7 +375,7 @@ select.fi option{background:var(--bg2);color:var(--text)}
   <!-- Nom client + bouton marque blanche -->
   <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:4px">
     <div style="font-family:Rajdhani,sans-serif;font-size:18px;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.5px" id="login-nom-entreprise">EGT</div>
-    <button id="btnLoginConfig" onclick="ouvrirConfigEntrepriseLogin()" style="display:none;font-size:9px;padding:2px 9px;background:rgba(255,107,43,.15);color:var(--accent);border:1px solid rgba(255,107,43,.35);border-radius:8px;cursor:pointer;font-family:monospace;letter-spacing:.5px">⚙ Super admin</button>
+    <button id="btnLoginConfig" onclick="ouvrirConfigEntrepriseLogin()" style="display:none;font-size:9px;padding:2px 9px;background:rgba(150,90,150,.15);color:var(--accent);border:1px solid rgba(150,90,150,.35);border-radius:8px;cursor:pointer;font-family:monospace;letter-spacing:.5px">⚙ Super admin</button>
   </div>
   <div class="login-sub" id="login-sous-titre">Entreprise Générale de Télécom</div>
 
@@ -437,7 +434,7 @@ select.fi option{background:var(--bg2);color:var(--text)}
     </div>
     <div class="fg"><label class="fl">Couleur principale</label>
       <div style="display:flex;gap:8px;align-items:center">
-        <input type="color" id="login_ce_couleur" value="#FF6B2B" style="width:44px;height:36px;border:1px solid var(--line2);border-radius:var(--rs);background:var(--bg2);cursor:pointer">
+        <input type="color" id="login_ce_couleur" value="#965A96" style="width:44px;height:36px;border:1px solid var(--line2);border-radius:var(--rs);background:var(--bg2);cursor:pointer">
         <span style="font-size:11px;color:var(--text2)">Couleur des boutons, badges et accents</span>
       </div>
     </div>
@@ -475,7 +472,7 @@ select.fi option{background:var(--bg2);color:var(--text)}
         </svg>
       </div>
       <div>
-        <div class="tb-t1" style="font-family:Rajdhani,sans-serif;font-weight:700;letter-spacing:.8px;font-size:15px">E-tech <span id="tb-company-tag" style="color:rgba(255,107,43,.8);font-size:11px;font-family:JetBrains Mono,monospace;font-weight:400;letter-spacing:1px">· EGT</span></div>
+        <div class="tb-t1" style="font-family:Rajdhani,sans-serif;font-weight:700;letter-spacing:.8px;font-size:15px">E-tech <span id="tb-company-tag" style="color:rgba(150,90,150,.8);font-size:11px;font-family:JetBrains Mono,monospace;font-weight:400;letter-spacing:1px">· EGT</span></div>
         <div class="tb-t2" id="tb-subtitle">Entreprise Générale de Télécom</div>
       </div>
     </div>
@@ -516,7 +513,7 @@ select.fi option{background:var(--bg2);color:var(--text)}
         <button class="btn-back-main" type="button" onclick="returnToProfiles()">← Retour</button>
         <h2>Planning</h2>
       </div>
-      <span class="pill p-blue" id="planWeekLabel" style="background:rgba(255,107,43,.1);color:var(--accent);font-size:11px"></span>
+      <span class="pill p-blue" id="planWeekLabel" style="background:rgba(150,90,150,.1);color:var(--accent);font-size:11px"></span>
     </div>
     <div class="scroll" id="bodyPlanning"></div>
   </div>
@@ -609,20 +606,7 @@ select.fi option{background:var(--bg2);color:var(--text)}
       <div class="det-sub" id="detSub"></div>
     </div>
     <div class="det-tabs" id="detTabs"></div>
-    <div id="od-panel-fixed" style="padding:10px 13px 0">
-  <div style="background:#1a1f2e;border:1px solid rgba(255,107,43,.3);border-radius:10px;padding:12px;margin-bottom:8px">
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-      <span style="font-size:18px">☁️</span>
-      <div style="flex:1">
-        <div style="font-size:12px;font-weight:600;color:#fff">Synchronisation OneDrive EGT</div>
-        <div id="od-status-indicator" style="font-size:10px;color:rgba(255,255,255,.5);margin-top:1px">○ Non connecté</div>
-      </div>
-    </div>
-    <div id="od-status-msg" style="font-size:11px;color:rgba(255,255,255,.5);min-height:14px;margin-bottom:8px"></div>
-    <button id="od-connect-btn" onclick="odConnect()" style="padding:7px 14px;background:#FF6B2B;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;width:100%">☁️ Connecter OneDrive EGT</button>
-  </div>
-</div>
-<div class="det-body" id="detBody"></div>
+    <div class="det-body" id="detBody"></div>
   </div>
 
   <!-- MODAL -->
@@ -656,7 +640,7 @@ select.fi option{background:var(--bg2);color:var(--text)}
     <input class="mmodal-input" id="mmodalInput" style="display:none;width:100%;border:1px solid rgba(255,255,255,.18);border-radius:6px;padding:10px 12px;font-size:13px;color:#F0F2F5;background:#111318;margin-bottom:12px;font-family:Inter,sans-serif" placeholder="">
     <div style="display:flex;gap:8px">
       <button id="mmodalCancel" onclick="mmodalClose()" style="flex:0 0 80px;padding:10px;background:#111318;border:1px solid rgba(255,255,255,.15);border-radius:6px;font-size:13px;color:#9BA3B2;cursor:pointer">Annuler</button>
-      <button id="mmodalOk" style="flex:1;padding:10px;background:#FF6B2B;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;font-family:Rajdhani,sans-serif;cursor:pointer">OK</button>
+      <button id="mmodalOk" style="flex:1;padding:10px;background:#965A96;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;font-family:Rajdhani,sans-serif;cursor:pointer">OK</button>
     </div>
   </div>
 </div>
@@ -746,7 +730,7 @@ function load(){
   if(!DB.pins)         DB.pins={};
   if(!DB.meta)         DB.meta={appVersion:'SUP',lastSavedAt:null,lastBackupAt:null};
   if(!DB.meta.appVersion) DB.meta.appVersion='SUP';
-  if(!DB.config)       DB.config={nomEntreprise:'EGT',sousTitre:'Entreprise Générale de Télécom',couleurAccent:'#FF6B2B'};
+  if(!DB.config)       DB.config={nomEntreprise:'EGT',sousTitre:'Entreprise Générale de Télécom',couleurAccent:'#965A96'};
   if(!Array.isArray(DB.companies)) DB.companies=[];
   initCompanyRegistry();
   // ── MIGRATION v19 : corriger les anciens donneurs ──
@@ -947,8 +931,8 @@ function buildLoginTechGrid(){
     grid.innerHTML='<div style="font-size:11px;color:var(--g4);text-align:center;padding:12px">Aucun technicien enregistre — ajoutez-en depuis le profil Admin</div>';
     return;
   }
-  var coulBg={blue:'rgba(255,107,43,.12)',teal:'rgba(0,196,122,.12)',amber:'rgba(240,165,0,.12)',gray:'rgba(90,96,112,.12)',red:'rgba(255,68,85,.12)',purple:'rgba(155,111,255,.12)'};
-  var coulText={blue:'#FF6B2B',teal:'#00C47A',amber:'#F0A500',gray:'#5A6070',red:'#FF4455',purple:'#9B6FFF'};
+  var coulBg={blue:'rgba(150,90,150,.12)',teal:'rgba(0,196,122,.12)',amber:'rgba(240,165,0,.12)',gray:'rgba(90,96,112,.12)',red:'rgba(255,68,85,.12)',purple:'rgba(155,111,255,.12)'};
+  var coulText={blue:'#965A96',teal:'#00C47A',amber:'#F0A500',gray:'#5A6070',red:'#FF4455',purple:'#9B6FFF'};
   grid.innerHTML='';
   for(var i=0;i<techs.length;i++){
     var t=techs[i];
@@ -1130,7 +1114,7 @@ function renderChantiers(){
   const quickFilterBar=chantierQuickFilter!=='all'?`<div style="margin:0 12px 8px;display:flex;align-items:center;justify-content:space-between;padding:8px 10px;background:var(--bg3);border:1px solid var(--line2);border-radius:var(--rs);font-size:11px"><span>Filtre : ${chantierQuickFilter==='active'?'Chantiers actifs':'Tous les chantiers'}</span><button class="btn-s" style="padding:4px 8px;font-size:10px" onclick="event.stopPropagation();setChantierQuickFilter('all')">Réinitialiser</button></div>`:'';
   document.getElementById('listChantiers').innerHTML=quickFilterBar+list.map(c=>{
     const st=statusOf(c.statut);
-    const doCfg=getDOConfig(c.donneur)||{couleur:'#FF6B2B',icone:'🏗️'};
+    const doCfg=getDOConfig(c.donneur)||{couleur:'#965A96',icone:'🏗️'};
     return`<div class="card" onclick="safeOpenDetail(${c.id})">
       <div class="card-bar" style="background:${st.bar}"></div>
       <div class="card-body">
@@ -1179,7 +1163,7 @@ const DO_CONFIGS = {
   // Basées sur les DFT réels fournis par EGT
 
   'Orange — CM/CR': {
-    couleur:'#FF6B2B', icone:'🟠',
+    couleur:'#965A96', icone:'🟠',
     groupe:'Orange',
     typesTravaux:['FTTH — Colonne Montante','FTTH — Colonne Rampante','CM/CR — Raccordement PBO','CM/CR — GTL DTIO','CM/CR — Mini Manchons PDO'],
     survey:[
@@ -1242,7 +1226,7 @@ const DO_CONFIGS = {
   },
 
   'Orange — ZMD': {
-    couleur:'#FF6B2B', icone:'🟠',
+    couleur:'#965A96', icone:'🟠',
     groupe:'Orange',
     typesTravaux:['FTTH — ZMD Déploiement','ZMD — PMZ/PMR','ZMD — PA','ZMD — Chambre','ZMD — PBO','ZMD — Tirage intérieur','ZMD — Recette OTDR'],
     survey:[
@@ -1296,7 +1280,7 @@ const DO_CONFIGS = {
   },
 
   'Orange — ZTD': {
-    couleur:'#FF6B2B', icone:'🟠',
+    couleur:'#965A96', icone:'🟠',
     groupe:'Orange',
     typesTravaux:['FTTH — ZTD Déploiement','ZTD — PEZ','ZTD — PR','ZTD — PMI','ZTD — BTI','ZTD — PBO','ZTD — Recette OTDR'],
     survey:[
@@ -1358,7 +1342,7 @@ const DO_CONFIGS = {
   },
 
   'Orange — PMGC': {
-    couleur:'#FF6B2B', icone:'🟠',
+    couleur:'#965A96', icone:'🟠',
     groupe:'Orange',
     typesTravaux:['FTTH — Clôture PMGC','FTTH — Raccordement PM Free/Orange','PMGC — Adduction','PMGC — Position PM','PMGC — Cheminement CIM','PMGC — Colonne montante'],
     survey:[
@@ -1878,19 +1862,11 @@ function openDetail(id,initialTab){
   dv.classList.add('open');
   dv.style.display='flex';
   currentTab=startTab;renderDetailTab(startTab);
-  // Afficher/masquer panneau OneDrive
-  const odp2 = document.getElementById('od-panel-fixed');
-  if(odp2) odp2.style.display = (startTab==='docs') ? 'block' : 'none';
-  if(startTab==='docs') setTimeout(odUpdateUI, 100);
 }
 
 function closeDetail(){
   window.currentChantier=null;const d=document.getElementById('detailView'); d.classList.remove('open'); d.style.display=''; const nav=document.getElementById('bottomNav'); if(nav) nav.style.display='flex'; nav.style.visibility='visible';}
-function switchTab(tab,el){
-  // Afficher/masquer panneau OneDrive selon l'onglet
-  const odp = document.getElementById('od-panel-fixed');
-  if(odp) odp.style.display = (tab==='docs') ? 'block' : 'none';
-  odUpdateUI();document.querySelectorAll('.dtab').forEach(t=>t.classList.remove('active'));el.classList.add('active');currentTab=tab;renderDetailTab(tab)}
+function switchTab(tab,el){document.querySelectorAll('.dtab').forEach(t=>t.classList.remove('active'));el.classList.add('active');currentTab=tab;renderDetailTab(tab)}
 
 function renderDetailTab(tab){
   const c=currentChantier||window.currentChantier;
@@ -1943,7 +1919,7 @@ function renderDetailTab(tab){
     }
     else if(currentUser.role==='technicien'||currentUser.role==='chef'){
       const assigned=(c.techniciens||[]).includes(currentUser.name) || c.prisEnChargePar===currentUser.name || currentUser.role==='chef';
-      html+=assigned?`<div style="margin-top:12px;padding:9px 11px;background:rgba(255,107,43,.07);border:1px solid rgba(255,107,43,.2);border-radius:var(--rs);font-size:11px;color:var(--accent)">📋 Ajoutez les photos, documents et remontées terrain pour ce chantier. Les actions d’arrivée GPS et de prise en charge restent disponibles depuis l’onglet Présence.</div>`:`<button class="btn-green" style="margin-top:12px" onclick="prendreEnCharge(${c.id})">🛠 Prendre en charge</button>`;
+      html+=assigned?`<div style="margin-top:12px;padding:9px 11px;background:rgba(150,90,150,.07);border:1px solid rgba(150,90,150,.2);border-radius:var(--rs);font-size:11px;color:var(--accent)">📋 Ajoutez les photos, documents et remontées terrain pour ce chantier. Les actions d’arrivée GPS et de prise en charge restent disponibles depuis l’onglet Présence.</div>`:`<button class="btn-green" style="margin-top:12px" onclick="prendreEnCharge(${c.id})">🛠 Prendre en charge</button>`;
     }
     body.innerHTML=html;
 
@@ -2048,25 +2024,7 @@ function renderDetailTab(tab){
   // ── DOCS ─────────────────────────────────────────────
   } else if(tab==='docs'){
     const fichiers=c.fichiers||[];
-    // ── Panneau OneDrive ──
-    const odPath = c.onedrivePath || '';
-    const odConnected = window.OD && window.OD.connected;
-    let html = `<div style="background:var(--bg3);border:1px solid var(--line2);border-radius:var(--r);padding:12px;margin-bottom:14px">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-        <span style="font-size:20px">☁️</span>
-        <div style="flex:1">
-          <div style="font-size:12px;font-weight:600;color:var(--text)">Synchronisation OneDrive EGT</div>
-          <div id="od-status-indicator" style="font-size:10px;margin-top:1px;color:${odConnected?'var(--green)':'var(--text2)'}">${odConnected?'● Connecté · '+(window.OD.account&&window.OD.account.username||''):'○ Non connecté'}</div>
-        </div>
-      </div>
-      <div id="od-status-msg" style="font-size:11px;color:var(--text2);min-height:14px;margin-bottom:8px"></div>
-      ${odPath?`<div style="font-size:10px;color:var(--accent);font-family:monospace;padding:4px 8px;background:rgba(255,107,43,.08);border-radius:4px;margin-bottom:8px;word-break:break-all">📁 ${odPath}</div>`:(odConnected?`<div style="font-size:11px;color:var(--amber);margin-bottom:8px">⚠️ Dossier OneDrive non créé pour ce chantier.</div>`:'')}
-      <div style="display:flex;gap:7px;flex-wrap:wrap">
-        <button id="od-connect-btn" onclick="${odConnected?'odDisconnect()':'odConnect()'}" style="padding:7px 12px;background:${odConnected?'var(--green)':'var(--accent)'};color:#fff;border:none;border-radius:var(--rs);font-size:11px;font-weight:600;cursor:pointer">${odConnected?'⛓️ Déconnecter OneDrive':'☁️ Connecter OneDrive EGT'}</button>
-        ${odConnected&&!odPath?`<button onclick="odCreateChantierFolders(DB.chantiers.find(x=>x.id===${c.id})).then(()=>renderDetailTab('docs'))" style="padding:7px 12px;background:var(--bg2);color:var(--text);border:1px solid var(--line2);border-radius:var(--rs);font-size:11px;cursor:pointer">📁 Créer dossier maintenant</button>`:''}
-      </div>
-    </div>`;
-    html+=`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+    let html=`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
       <div style="font-size:10px;color:var(--accent);font-family:monospace;letter-spacing:1px;text-transform:uppercase">${cfg.icone} Docs chantier — ${c.donneur||'—'}</div>
       ${cfg.ongletsDFT?`<div style="font-size:9px;color:var(--g4);font-family:monospace">${cfg.ongletsDFT.length} onglets Excel</div>`:''}
     </div>`;
@@ -2107,7 +2065,7 @@ function renderDetailTab(tab){
     const chFrais=DB.frais.filter(f=>f.chantierId===c.id);
     const total=chFrais.reduce((s,f)=>s+f.montant,0);
     let html=chFrais.map(f=>{const ft=fraisTypeOf(f.type);return`<div class="frais-row"><div class="frais-ico" style="background:${ft.bg}">${ft.ico}</div><div style="flex:1"><div style="font-size:12px;font-weight:500">${f.description||ft.l}</div><div style="font-size:10px;color:var(--text2)">${f.technicien||'—'} · ${f.vehiculeImmat||f.chantierNom||'—'} · ${fmtDate(f.date)}</div></div><div style="text-align:right"><div style="font-size:13px;font-weight:600;font-family:monospace">${f.montant.toLocaleString('fr-FR')} €</div><span class="pill ${f.statut==='valide'?'p-green':'p-amber'}">${f.statut==='valide'?'Validé':'Attente'}</span></div></div>`;}).join('')||'<p style="font-size:12px;color:var(--text2)">Aucun frais.</p>';
-    body.innerHTML=html+`<div style="display:flex;justify-content:space-between;padding:9px 11px;background:rgba(255,107,43,.08);border:1px solid rgba(255,107,43,.2);border-radius:var(--rs);margin-top:7px"><span style="font-size:12px;font-weight:500;color:var(--accent)">Total chantier</span><span style="font-size:14px;font-weight:600;color:var(--accent);font-family:monospace">${total.toLocaleString('fr-FR')} €</span></div><button class="upload-btn" style="margin-top:9px" onclick="openModal('frais')"><span style="font-size:18px">📷</span><span>Scanner un reçu / ajouter</span></button>`;
+    body.innerHTML=html+`<div style="display:flex;justify-content:space-between;padding:9px 11px;background:rgba(150,90,150,.08);border:1px solid rgba(150,90,150,.2);border-radius:var(--rs);margin-top:7px"><span style="font-size:12px;font-weight:500;color:var(--accent)">Total chantier</span><span style="font-size:14px;font-weight:600;color:var(--accent);font-family:monospace">${total.toLocaleString('fr-FR')} €</span></div><button class="upload-btn" style="margin-top:9px" onclick="openModal('frais')"><span style="font-size:18px">📷</span><span>Scanner un reçu / ajouter</span></button>`;
 
   // ── SÉCURITÉ ─────────────────────────────────────────
   } else if(tab==='securite'){
@@ -2573,8 +2531,8 @@ function renderEquipe(){
 
   DB.techniciens.forEach(t=>{
     const[sL,sB]=statMap[t.statut]||['—','b-gray'];
-    const coulBg={blue:'rgba(255,107,43,.12)',teal:'rgba(0,196,122,.12)',amber:'rgba(240,165,0,.12)',gray:'rgba(90,96,112,.12)',red:'rgba(255,68,85,.12)',purple:'rgba(155,111,255,.12)'};
-    const coulText={blue:'#FF6B2B',teal:'#00C47A',amber:'#F0A500',gray:'#5A6070',red:'#FF4455',purple:'#9B6FFF'};
+    const coulBg={blue:'rgba(150,90,150,.12)',teal:'rgba(0,196,122,.12)',amber:'rgba(240,165,0,.12)',gray:'rgba(90,96,112,.12)',red:'rgba(255,68,85,.12)',purple:'rgba(155,111,255,.12)'};
+    const coulText={blue:'#965A96',teal:'#00C47A',amber:'#F0A500',gray:'#5A6070',red:'#FF4455',purple:'#9B6FFF'};
     const bg=coulBg[t?.couleur]||coulBg.gray;
     const tc=coulText[t?.couleur]||coulText.gray;
     const canManage=perm('canManageTeam');
@@ -2803,7 +2761,7 @@ function simulateScan(){
           <select class="fi" id="ocrChantier"><option value="">— Optionnel —</option>${chOpts}</select></div>
 
         ${isCarbu?`
-        <div style="background:rgba(255,107,43,.07);border-radius:var(--rs);padding:9px 11px;margin-bottom:10px">
+        <div style="background:rgba(150,90,150,.07);border-radius:var(--rs);padding:9px 11px;margin-bottom:10px">
           <div style="font-size:11px;font-weight:600;color:var(--accent);margin-bottom:8px">📊 Contrôle kilométrique obligatoire</div>
           <div class="fg" style="margin-bottom:8px"><label class="fl">Véhicule utilisé *</label>
             <select class="fi" id="ocrVehicule" onchange="updateKmCoherence(${s.litres},'${s.typeCarbu}')">
@@ -3402,7 +3360,7 @@ function openModal(type,extra){
     </div>
     <div class="fg"><label class="fl">Couleur principale</label>
       <div style="display:flex;gap:8px;align-items:center">
-        <input type="color" id="ce_couleur" value="${cfg.couleurAccent||'#FF6B2B'}" style="width:44px;height:36px;border:1px solid var(--line2);border-radius:var(--rs);background:var(--bg2);cursor:pointer">
+        <input type="color" id="ce_couleur" value="${cfg.couleurAccent||'#965A96'}" style="width:44px;height:36px;border:1px solid var(--line2);border-radius:var(--rs);background:var(--bg2);cursor:pointer">
         <span style="font-size:11px;color:var(--text2)">Couleur des boutons, badges et accents</span>
       </div>
     </div>
@@ -3478,7 +3436,7 @@ function openModal(type,extra){
         <div style="font-size:9px;color:var(--text2);margin-top:2px">Km EGT</div>
       </div>
     </div>
-    <div style="background:rgba(255,107,43,.07);border-radius:var(--rs);padding:8px 10px;margin-bottom:12px;font-size:11px;color:var(--blue)">Kilométrage actuel : <strong>${(v?.km||0).toLocaleString('fr-FR')} km</strong>${v?.prochRevision?` · Révision à ${v.prochRevision.toLocaleString('fr-FR')} km (encore ${Math.max(0,v.prochRevision-(v.km||0)).toLocaleString('fr-FR')} km)`:''}</div>
+    <div style="background:rgba(150,90,150,.07);border-radius:var(--rs);padding:8px 10px;margin-bottom:12px;font-size:11px;color:var(--blue)">Kilométrage actuel : <strong>${(v?.km||0).toLocaleString('fr-FR')} km</strong>${v?.prochRevision?` · Révision à ${v.prochRevision.toLocaleString('fr-FR')} km (encore ${Math.max(0,v.prochRevision-(v.km||0)).toLocaleString('fr-FR')} km)`:''}</div>
     <div class="fg"><label class="fl">Nouveau relevé compteur (km) *</label><input class="fi" id="m_kmval" type="number" placeholder="Saisir le km compteur" min="${(v?.km||0)+1}"></div>
     <div class="fg"><label class="fl">Chantier associé à ce déplacement</label><select class="fi" id="m_kmch"><option value="">— Optionnel —</option>${chOpts}</select></div>
     <div class="fg"><label class="fl">Date du relevé</label><input class="fi" id="m_kmdate" type="date" value="${today()}"></div>
@@ -3758,7 +3716,7 @@ function makeCompanyId(){
 }
 
 function initCompanyRegistry(){
-  if(!DB.config) DB.config={nomEntreprise:'EGT',sousTitre:'Entreprise Générale de Télécom',couleurAccent:'#FF6B2B'};
+  if(!DB.config) DB.config={nomEntreprise:'EGT',sousTitre:'Entreprise Générale de Télécom',couleurAccent:'#965A96'};
   if(!Array.isArray(DB.companies) || !DB.companies.length){
     // Premier lancement : créer entrée EGT SANS applyCompanySnapshot
     // pour ne pas écraser les données fraîchement chargées par load()
@@ -3795,7 +3753,7 @@ function fillCompanyFormFromSnapshot(snapshot){
   const couleurEl=document.getElementById('login_ce_couleur');
   if(nomEl) nomEl.value=cfg.nomEntreprise||'EGT';
   if(sousEl) sousEl.value=cfg.sousTitre||'Entreprise Générale de Télécom';
-  if(couleurEl) couleurEl.value=cfg.couleurAccent||'#FF6B2B';
+  if(couleurEl) couleurEl.value=cfg.couleurAccent||'#965A96';
 }
 
 function editCompany(companyId){
@@ -3898,7 +3856,7 @@ function createBlankCompanyRecord(nom,sousTitre,couleur){
 function sanitizeCompanyInputs(prefix){
   const nom=document.getElementById(prefix+'ce_nom')?.value?.trim()||'EGT';
   const sousTitre=document.getElementById(prefix+'ce_sous')?.value?.trim()||'Entreprise Générale de Télécom';
-  const couleur=document.getElementById(prefix+'ce_couleur')?.value||'#FF6B2B';
+  const couleur=document.getElementById(prefix+'ce_couleur')?.value||'#965A96';
   return {nom,sousTitre,couleur};
 }
 
@@ -4084,7 +4042,7 @@ function applyConfigEntreprise(){
   if(!DB.config)return;
   var nom=DB.config.nomEntreprise;
   var sous=DB.config.sousTitre;
-  var couleur=DB.config.couleurAccent||'#FF6B2B';
+  var couleur=DB.config.couleurAccent||'#965A96';
   document.documentElement.style.setProperty('--accent',couleur);
   // Login screen — IDs directs
   var elNom=document.getElementById('login-nom-entreprise');
@@ -5113,502 +5071,6 @@ applyProfilsFixes();
 renderCompanyRegistry();
 </script>
 
-<!-- ═══════════════════════════════════════════════════════
-     MODULE ONEDRIVE EGT — Synchronisation automatique
-     Utilise Microsoft Graph API (MSAL) — compte M365 EGT
-     ═══════════════════════════════════════════════════════ -->
-<script src="https://alcdn.msauth.net/browser/2.38.0/js/msal-browser.min.js"></script>
-<script>
-// Fallback CDN si le CDN Microsoft est bloqué
-if (typeof msal === 'undefined') {
-  var s = document.createElement('script');
-  s.src = 'https://unpkg.com/@azure/msal-browser@2.38.0/lib/msal-browser.min.js';
-  s.onload  = function(){ console.log('[OD] MSAL chargé via fallback CDN'); setTimeout(odInit, 300); };
-  s.onerror = function(){ console.warn('[OD] MSAL indisponible — OneDrive désactivé en mode fichier local'); };
-  document.head.appendChild(s);
-}
-</script>
-<script>
-// ─────────────────────────────────────────────
-//  CONFIGURATION — À RENSEIGNER PAR L'ADMIN EGT
-// ─────────────────────────────────────────────
-const OD_CONFIG = {
-  // Azure App Registration — compte EGT
-  clientId:    'd3d97a68-884e-4ac6-948d-11fc509bf593',  // EGT App Chantiers
-  tenantId:    '906bb4c2-f82c-4b7e-a6bb-41311b792bfe',  // Annuaire EGT
-  // Dossier racine sur OneDrive EGT
-  rootFolder:  'EGT-Chantiers',
-  // Sous-dossiers créés automatiquement à chaque nouveau chantier
-  subFolders:  ['Photos', 'Documents', 'Sécurité'],
-  // Scopes Graph API nécessaires
-  scopes:      ['Files.ReadWrite', 'offline_access']
-};
-
-// ─────────────────────────────────────────────
-//  ÉTAT GLOBAL ONEDRIVE
-// ─────────────────────────────────────────────
-window.OD = {
-  msalApp:   null,
-  account:   null,
-  token:     null,
-  connected: false,
-  folderCache: {},   // chantierId → { rootId, photosId, docsId, secId }
-  uploadQueue: [],
-  uploading:  false
-};
-
-// ─────────────────────────────────────────────
-//  INITIALISATION MSAL
-// ─────────────────────────────────────────────
-function odInit() {
-  if (!window.msal) {
-    console.warn('[OD] MSAL non chargé — OneDrive désactivé. Normal en mode fichier local (file://). Hébergez l\'application sur un serveur https:// pour activer la synchronisation.');
-    return;
-  }
-  try {
-    OD.msalApp = new msal.PublicClientApplication({
-      auth: {
-        clientId:  OD_CONFIG.clientId,
-        authority: 'https://login.microsoftonline.com/' + OD_CONFIG.tenantId,
-        redirectUri: window.location.href.split('?')[0]
-      },
-      cache: { cacheLocation: 'localStorage', storeAuthStateInCookie: false }
-    });
-    // Récupère le compte déjà connecté si disponible
-    const accounts = OD.msalApp.getAllAccounts();
-    if (accounts.length > 0) {
-      OD.account = accounts[0];
-      odRefreshToken().then(() => odUpdateUI());
-    }
-    odUpdateUI();
-  } catch(e) { console.warn('OD init error', e); }
-}
-
-// ─────────────────────────────────────────────
-//  CONNEXION / DÉCONNEXION
-// ─────────────────────────────────────────────
-async function odConnect() {
-  if (!OD.msalApp) { odShowStatus('Module OneDrive non initialisé. Vérifiez la configuration Azure.', 'error'); return; }
-  try {
-    odShowStatus('Connexion à Microsoft 365 EGT…', 'info');
-    const result = await OD.msalApp.loginPopup({ scopes: OD_CONFIG.scopes });
-    OD.account = result.account;
-    OD.token   = result.accessToken;
-    OD.connected = true;
-    // Créer le dossier racine EGT-Chantiers s'il n'existe pas
-    await odEnsureRootFolder();
-    odUpdateUI();
-    odShowStatus('✓ Connecté à OneDrive EGT — ' + OD.account.username, 'success');
-    showNotif('OneDrive EGT connecté', 'success');
-  } catch(e) {
-    console.warn('OD login error', e);
-    odShowStatus('Connexion annulée ou échouée. Réessayez.', 'error');
-  }
-}
-
-function odDisconnect() {
-  if (!OD.msalApp) return;
-  OD.msalApp.logoutPopup({ account: OD.account });
-  OD.account = null; OD.token = null; OD.connected = false; OD.folderCache = {};
-  odUpdateUI();
-  odShowStatus('Déconnecté de OneDrive.', 'info');
-}
-
-// ─────────────────────────────────────────────
-//  RAFRAICHISSEMENT TOKEN SILENCIEUX
-// ─────────────────────────────────────────────
-async function odRefreshToken() {
-  if (!OD.msalApp || !OD.account) return null;
-  try {
-    const res = await OD.msalApp.acquireTokenSilent({ scopes: OD_CONFIG.scopes, account: OD.account });
-    OD.token = res.accessToken;
-    OD.connected = true;
-    return OD.token;
-  } catch(e) {
-    OD.connected = false; OD.token = null;
-    return null;
-  }
-}
-
-// ─────────────────────────────────────────────
-//  APPELS GRAPH API — HELPERS
-// ─────────────────────────────────────────────
-async function odGraph(method, path, body, isUpload) {
-  let token = OD.token;
-  if (!token) token = await odRefreshToken();
-  if (!token) throw new Error('Non authentifié');
-  const headers = { 'Authorization': 'Bearer ' + token };
-  if (!isUpload) headers['Content-Type'] = 'application/json';
-  const opts = { method, headers };
-  if (body && !isUpload) opts.body = JSON.stringify(body);
-  if (body && isUpload)  opts.body = body;
-  const r = await fetch('https://graph.microsoft.com/v1.0' + path, opts);
-  if (!r.ok) {
-    const err = await r.json().catch(() => ({}));
-    throw new Error((err.error && err.error.message) || ('Graph ' + r.status));
-  }
-  if (r.status === 204) return {};
-  return r.json();
-}
-
-// Créer un dossier (retourne l'item créé ou existant)
-async function odCreateFolder(parentPath, folderName) {
-  try {
-    const res = await odGraph('POST',
-      '/me/drive/root:/' + encodeURIComponent(parentPath) + ':/children',
-      { name: folderName, folder: {}, '@microsoft.graph.conflictBehavior': 'rename' }
-    );
-    return res;
-  } catch(e) {
-    // Si dossier déjà existant, récupérer son ID
-    try {
-      return await odGraph('GET', '/me/drive/root:/' + encodeURIComponent(parentPath + '/' + folderName));
-    } catch(e2) { throw e2; }
-  }
-}
-
-// Uploader un fichier (≤ 4 Mo via simple PUT, sinon upload session)
-async function odUploadFile(parentPath, fileName, dataUrl) {
-  // Convertir dataUrl en Blob
-  const arr = dataUrl.split(',');
-  const mime = arr[0].match(/:(.*?);/)[1];
-  const bstr = atob(arr[1]);
-  let n = bstr.length;
-  const u8 = new Uint8Array(n);
-  while (n--) u8[n] = bstr.charCodeAt(n);
-  const blob = new Blob([u8], { type: mime });
-
-  const safeName = fileName.replace(/[\\/:*?"<>|]/g, '_');
-  const uploadPath = '/me/drive/root:/' + encodeURIComponent(parentPath + '/' + safeName) + ':/content';
-
-  if (blob.size <= 4 * 1024 * 1024) {
-    // Upload simple
-    const token = OD.token || await odRefreshToken();
-    const r = await fetch('https://graph.microsoft.com/v1.0' + uploadPath, {
-      method: 'PUT',
-      headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': mime },
-      body: blob
-    });
-    if (!r.ok) throw new Error('Upload échoué : ' + r.status);
-    return r.json();
-  } else {
-    // Upload de grande taille via session
-    const session = await odGraph('POST',
-      '/me/drive/root:/' + encodeURIComponent(parentPath + '/' + safeName) + ':/createUploadSession',
-      { item: { '@microsoft.graph.conflictBehavior': 'replace' } }
-    );
-    const uploadUrl = session.uploadUrl;
-    const token = OD.token || await odRefreshToken();
-    const r = await fetch(uploadUrl, {
-      method: 'PUT',
-      headers: {
-        'Content-Length': String(blob.size),
-        'Content-Range': 'bytes 0-' + (blob.size - 1) + '/' + blob.size
-      },
-      body: blob
-    });
-    if (!r.ok) throw new Error('Upload grande taille échoué : ' + r.status);
-    return r.json();
-  }
-}
-
-// ─────────────────────────────────────────────
-//  DOSSIER RACINE EGT-Chantiers
-// ─────────────────────────────────────────────
-async function odEnsureRootFolder() {
-  try {
-    await odGraph('GET', '/me/drive/root:/' + encodeURIComponent(OD_CONFIG.rootFolder));
-  } catch(e) {
-    // Créer le dossier racine
-    await odGraph('POST', '/me/drive/root/children', {
-      name: OD_CONFIG.rootFolder, folder: {}, '@microsoft.graph.conflictBehavior': 'rename'
-    });
-  }
-}
-
-// ─────────────────────────────────────────────
-//  CRÉER LE DOSSIER CHANTIER + SOUS-DOSSIERS
-//  Appelé automatiquement à la création du chantier
-// ─────────────────────────────────────────────
-async function odCreateChantierFolders(chantier) {
-  if (!OD.connected) return;
-  const chantierName = odSanitizeName(chantier.ref + ' — ' + chantier.nom);
-  const basePath = OD_CONFIG.rootFolder + '/' + chantierName;
-
-  odShowBadge(chantier.id, 'sync');
-  try {
-    // 1. Créer le dossier principal du chantier
-    const mainFolder = await odCreateFolder(OD_CONFIG.rootFolder, chantierName);
-
-    // 2. Créer les sous-dossiers Photos / Documents / Sécurité
-    const subIds = {};
-    for (const sub of OD_CONFIG.subFolders) {
-      const subFolder = await odCreateFolder(basePath, sub);
-      subIds[sub] = subFolder.id;
-    }
-
-    // 3. Mettre en cache les IDs pour les uploads futurs
-    OD.folderCache[chantier.id] = {
-      path:       basePath,
-      rootId:     mainFolder.id,
-      photosPath: basePath + '/Photos',
-      docsPath:   basePath + '/Documents',
-      secPath:    basePath + '/Sécurité'
-    };
-
-    // 4. Sauvegarder le chemin OneDrive dans les données du chantier
-    const dbC = DB.chantiers.find(x => x.id === chantier.id);
-    if (dbC) { dbC.onedrivePath = basePath; dbC.onedriveId = mainFolder.id; save(); }
-
-    odShowBadge(chantier.id, 'ok');
-    odShowStatus('📁 Dossier créé sur OneDrive : ' + chantierName, 'success');
-    console.log('[OD] Dossier chantier créé :', basePath);
-  } catch(e) {
-    console.warn('[OD] Erreur création dossier chantier :', e);
-    odShowBadge(chantier.id, 'error');
-    odShowStatus('Erreur création dossier OneDrive : ' + e.message, 'error');
-  }
-}
-
-// ─────────────────────────────────────────────
-//  UPLOADER UNE PHOTO VERS ONEDRIVE
-// ─────────────────────────────────────────────
-async function odUploadPhoto(chantierId, dataUrl, fileName) {
-  if (!OD.connected || !dataUrl || !dataUrl.startsWith('data:')) return;
-  const cache = await odGetChantierCache(chantierId);
-  if (!cache) return;
-  const ts = new Date().toISOString().replace(/[:.]/g,'-').substring(0,19);
-  const safeName = (fileName || ('photo_' + ts + '.jpg')).replace(/[\\/:*?"<>|]/g, '_');
-  try {
-    await odUploadFile(cache.photosPath, safeName, dataUrl);
-    console.log('[OD] Photo uploadée :', cache.photosPath + '/' + safeName);
-  } catch(e) {
-    console.warn('[OD] Erreur upload photo :', e);
-  }
-}
-
-// ─────────────────────────────────────────────
-//  UPLOADER UN DOCUMENT VERS ONEDRIVE
-// ─────────────────────────────────────────────
-async function odUploadDocument(chantierId, dataUrl, fileName, isSecurite) {
-  if (!OD.connected || !dataUrl || !dataUrl.startsWith('data:')) return;
-  const cache = await odGetChantierCache(chantierId);
-  if (!cache) return;
-  const targetPath = isSecurite ? cache.secPath : cache.docsPath;
-  const ts = new Date().toISOString().replace(/[:.]/g,'-').substring(0,19);
-  const safeName = (fileName || ('doc_' + ts)).replace(/[\\/:*?"<>|]/g, '_');
-  try {
-    await odUploadFile(targetPath, safeName, dataUrl);
-    console.log('[OD] Document uploadé :', targetPath + '/' + safeName);
-  } catch(e) {
-    console.warn('[OD] Erreur upload document :', e);
-  }
-}
-
-// Récupère ou reconstruit le cache du dossier chantier
-async function odGetChantierCache(chantierId) {
-  if (OD.folderCache[chantierId]) return OD.folderCache[chantierId];
-  // Reconstruire depuis les données DB
-  const dbC = DB.chantiers.find(x => x.id === chantierId);
-  if (!dbC || !dbC.onedrivePath) return null;
-  const cache = {
-    path:       dbC.onedrivePath,
-    photosPath: dbC.onedrivePath + '/Photos',
-    docsPath:   dbC.onedrivePath + '/Documents',
-    secPath:    dbC.onedrivePath + '/Sécurité'
-  };
-  OD.folderCache[chantierId] = cache;
-  return cache;
-}
-
-// ─────────────────────────────────────────────
-//  UTILITAIRES
-// ─────────────────────────────────────────────
-function odSanitizeName(name) {
-  return name.replace(/[\\/:*?"<>|]/g, '_').substring(0, 100);
-}
-
-function odShowStatus(msg, type) {
-  const el = document.getElementById('od-status-msg');
-  if (!el) return;
-  el.textContent = msg;
-  el.className = 'od-status-msg od-msg-' + (type || 'info');
-  clearTimeout(el._t);
-  if (type === 'success') el._t = setTimeout(() => { if(el.textContent===msg) el.textContent=''; }, 5000);
-}
-
-function odShowBadge(chantierId, state) {
-  const el = document.querySelector('[data-od-badge="' + chantierId + '"]');
-  if (!el) return;
-  const icons = { sync: '⏳', ok: '☁️', error: '⚠️' };
-  el.textContent = icons[state] || '';
-  el.title = { sync: 'Synchronisation OneDrive…', ok: 'Dossier OneDrive créé', error: 'Erreur OneDrive' }[state] || '';
-}
-
-function odUpdateUI() {
-  const btn = document.getElementById('od-connect-btn');
-  const statusEl = document.getElementById('od-status-indicator');
-  if (!btn) return;
-  if (OD.connected && OD.account) {
-    btn.textContent = '⛓️ Déconnecter OneDrive';
-    btn.onclick = odDisconnect;
-    btn.style.background = 'var(--green)';
-    if (statusEl) { statusEl.textContent = '● Connecté · ' + OD.account.username; statusEl.style.color = 'var(--green)'; }
-  } else {
-    btn.textContent = '☁️ Connecter OneDrive EGT';
-    btn.onclick = odConnect;
-    btn.style.background = 'var(--accent)';
-    if (statusEl) { statusEl.textContent = '○ Non connecté'; statusEl.style.color = 'var(--text2)'; }
-  }
-}
-
-// ─────────────────────────────────────────────
-//  PATCH DES FONCTIONS EXISTANTES
-//  Injection non-destructive : surcharge après définition
-// ─────────────────────────────────────────────
-
-// 1. CRÉATION DE CHANTIER → créer automatiquement le dossier OneDrive
-const _saveChantier_orig = window.saveChantier;
-window.saveChantier = function(editId) {
-  const countBefore = (DB.chantiers || []).length;
-  _saveChantier_orig.apply(this, arguments);
-  if (!editId) {
-    // Nouveau chantier créé
-    const countAfter = (DB.chantiers || []).length;
-    if (countAfter > countBefore && OD.connected) {
-      const newC = DB.chantiers[0]; // unshift → premier élément
-      setTimeout(() => odCreateChantierFolders(newC), 500);
-    }
-  }
-};
-
-// 2. AJOUT PHOTO (arborescence photos) → upload OneDrive
-const _addPhotoLeaf_orig = window.addPhotoLeaf;
-window.addPhotoLeaf = function(input, folderKey) {
-  const file = input && input.files && input.files[0];
-  const chantierId = (window.currentChantier || {}).id;
-  _addPhotoLeaf_orig.apply(this, arguments);
-  if (file && chantierId && OD.connected) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const ts = new Date().toISOString().replace(/[:.]/g,'-').substring(0,19);
-      const name = (folderKey + '_' + ts + '_' + file.name).substring(0,120);
-      odUploadPhoto(chantierId, e.target.result, name);
-    };
-    reader.readAsDataURL(file);
-  }
-};
-
-// 3. AJOUT PHOTO DFT → upload OneDrive dans Photos
-const _addDFTPhotoFile_orig = window.addDFTPhotoFile;
-window.addDFTPhotoFile = function(input, key, label) {
-  const file = input && input.files && input.files[0];
-  const chantierId = (window.currentChantier || {}).id;
-  _addDFTPhotoFile_orig.apply(this, arguments);
-  if (file && chantierId && OD.connected) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const ts = new Date().toISOString().replace(/[:.]/g,'-').substring(0,19);
-      const name = 'DFT_' + (key||'').replace(/\s+/g,'_') + '_' + ts + '_' + file.name;
-      odUploadPhoto(chantierId, e.target.result, name);
-    };
-    reader.readAsDataURL(file);
-  }
-};
-
-// 4. AJOUT FICHIER/DOCUMENT (onglet Docs) → upload OneDrive dans Documents
-const _addFichierChantier_orig = window.addFichierChantier;
-window.addFichierChantier = function(input) {
-  const file = input && input.files && input.files[0];
-  const chantierId = (window.currentChantier || {}).id;
-  _addFichierChantier_orig.apply(this, arguments);
-  if (file && chantierId && OD.connected) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      odUploadDocument(chantierId, e.target.result, file.name, false);
-    };
-    reader.readAsDataURL(file);
-  }
-};
-
-// 5. DOCUMENT SÉCURITÉ → upload OneDrive dans Sécurité
-//    addDocSec utilise saisie texte (pas de fichier) — on patch pour proposer l'upload fichier
-const _addDocSec_orig = window.addDocSec;
-window.addDocSec = function() {
-  _addDocSec_orig.apply(this, arguments);
-  // Note : la fonction originale est basée sur un nom saisi manuellement (pas un fichier réel).
-  // L'upload physique se déclenche uniquement lorsqu'un fichier est joint via addFichierChantier.
-  // Pour uploader des docs sécurité en fichiers, l'utilisateur peut les ajouter via l'onglet Docs.
-};
-
-// ─────────────────────────────────────────────
-//  PANNEAU ONEDRIVE (UI dans l'onglet Docs)
-// ─────────────────────────────────────────────
-function renderOneDrivePanel() {
-  const el = document.getElementById('od-panel');
-  if (!el) return;
-  const c = window.currentChantier;
-  const hasPath = c && DB.chantiers.find(x=>x.id===c.id)?.onedrivePath;
-  el.innerHTML = `
-    <div style="background:var(--bg3);border:1px solid var(--line2);border-radius:var(--r);padding:12px;margin-bottom:10px">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-        <span style="font-size:18px">☁️</span>
-        <div>
-          <div style="font-size:12px;font-weight:600;color:var(--text)">Synchronisation OneDrive EGT</div>
-          <div id="od-status-indicator" style="font-size:10px;color:var(--text2);margin-top:1px">○ Non connecté</div>
-        </div>
-      </div>
-      <div id="od-status-msg" class="od-status-msg" style="font-size:11px;color:var(--text2);margin-bottom:8px;min-height:14px"></div>
-      ${hasPath ? `<div style="font-size:10px;color:var(--accent);font-family:monospace;padding:4px 8px;background:var(--accent-lt2);border-radius:4px;margin-bottom:8px;word-break:break-all">📁 ${DB.chantiers.find(x=>x.id===c.id).onedrivePath}</div>` : OD.connected ? `<div style="font-size:11px;color:var(--amber);margin-bottom:8px">⚠️ Dossier OneDrive non encore créé pour ce chantier.</div>` : ''}
-      <div style="display:flex;gap:7px;flex-wrap:wrap">
-        <button id="od-connect-btn" onclick="odConnect()" style="padding:7px 12px;background:var(--accent);color:#fff;border:none;border-radius:var(--rs);font-size:11px;font-weight:600;cursor:pointer">☁️ Connecter OneDrive EGT</button>
-        ${OD.connected && !hasPath && c ? `<button onclick="odCreateChantierFolders(DB.chantiers.find(x=>x.id===${c.id}));setTimeout(()=>renderDetailTab('docs'),1500)" style="padding:7px 12px;background:var(--bg4);color:var(--text);border:1px solid var(--line2);border-radius:var(--rs);font-size:11px;cursor:pointer">📁 Créer dossier maintenant</button>` : ''}
-      </div>
-    </div>`;
-  odUpdateUI();
-}
-
-// Appeler renderOneDrivePanel à l'ouverture de l'onglet Docs
-const _renderDetailTab_orig = window.renderDetailTab;
-window.renderDetailTab = function(tab) {
-  _renderDetailTab_orig.apply(this, arguments);
-  if (tab === 'docs') {
-    setTimeout(() => {
-      // Injecter le panneau OneDrive en haut de l'onglet docs si absent
-      const body = document.getElementById('detBody');
-      if (body && !document.getElementById('od-panel')) {
-        const panel = document.createElement('div');
-        panel.id = 'od-panel';
-        body.insertBefore(panel, body.firstChild);
-      }
-      renderOneDrivePanel();
-    }, 50);
-  }
-};
-
-// ─────────────────────────────────────────────
-//  STYLE CSS pour le panneau OneDrive
-// ─────────────────────────────────────────────
-(function() {
-  const style = document.createElement('style');
-  style.textContent = `
-    .od-status-msg { transition: color .3s; }
-    .od-msg-success { color: var(--green) !important; }
-    .od-msg-error   { color: var(--red)   !important; }
-    .od-msg-info    { color: var(--text2) !important; }
-    [data-od-badge] { font-size: 12px; margin-left: 4px; }
-  `;
-  document.head.appendChild(style);
-})();
-
-// ─────────────────────────────────────────────
-//  DÉMARRAGE
-// ─────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', function() {
-  setTimeout(odInit, 800);
-});
-</script>
-
 <script>
 (function(){
   function safe(v){return v==null?'':String(v)}
@@ -6152,5 +5614,174 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <input type="file" id="photoCaptureInput" accept="image/*" capture="environment" style="display:none" onchange="handlePhotoCapture(this)">
+
+<!-- ═══════════════════════════════════════════════════════
+     MODULE FIREBASE EGT — Base de données partagée en temps réel
+     ═══════════════════════════════════════════════════════ -->
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getFirestore, collection, doc, setDoc, getDoc, getDocs, onSnapshot, deleteDoc, query, orderBy, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDLweNIl7Vc1a_SUrKiWUriMKTc9MEkex0",
+    authDomain: "egt-app-bb6c0.firebaseapp.com",
+    projectId: "egt-app-bb6c0",
+    storageBucket: "egt-app-bb6c0.firebasestorage.app",
+    messagingSenderId: "211765326412",
+    appId: "1:211765326412:web:ecef15d9ee892310d4fae9"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  window.FBDB = db;
+  window.FB = { collection, doc, setDoc, getDoc, getDocs, onSnapshot, deleteDoc, query, orderBy, serverTimestamp };
+  window.firebaseReady = true;
+  console.log('[EGT Firebase] Connecté ✓');
+
+  // ─── SYNC : Charger depuis Firebase au démarrage ───
+  async function syncFromFirebase() {
+    try {
+      // Chantiers
+      const chantiersSnap = await getDocs(collection(db, 'chantiers'));
+      const chantiers = [];
+      chantiersSnap.forEach(d => chantiers.push(d.data()));
+      if (chantiers.length > 0) {
+        DB.chantiers = chantiers;
+        console.log('[FB] Chantiers chargés:', chantiers.length);
+      }
+
+      // Techniciens
+      const techSnap = await getDocs(collection(db, 'techniciens'));
+      const techs = [];
+      techSnap.forEach(d => techs.push(d.data()));
+      if (techs.length > 0) {
+        DB.techniciens = techs;
+        console.log('[FB] Techniciens chargés:', techs.length);
+      }
+
+      // Véhicules
+      const vehSnap = await getDocs(collection(db, 'vehicules'));
+      const vehs = [];
+      vehSnap.forEach(d => vehs.push(d.data()));
+      if (vehs.length > 0) {
+        DB.vehicules = vehs;
+        console.log('[FB] Véhicules chargés:', vehs.length);
+      }
+
+      save();
+      if (window.currentScreen) renderScreen(window.currentScreen);
+      showNotif('Données synchronisées ✓', 'success');
+    } catch(e) {
+      console.warn('[FB] Erreur sync:', e);
+    }
+  }
+
+  // ─── LISTENER TEMPS RÉEL sur les chantiers ───
+  function startRealtimeSync() {
+    const q = query(collection(db, 'chantiers'), orderBy('updatedAt', 'desc'));
+    onSnapshot(q, (snapshot) => {
+      snapshot.docChanges().forEach(change => {
+        const data = change.doc.data();
+        if (change.type === 'added' || change.type === 'modified') {
+          const idx = DB.chantiers.findIndex(c => c.id === data.id);
+          if (idx >= 0) DB.chantiers[idx] = data;
+          else DB.chantiers.unshift(data);
+        } else if (change.type === 'removed') {
+          DB.chantiers = DB.chantiers.filter(c => c.id !== data.id);
+        }
+      });
+      save();
+      if (window.currentScreen === 'chantiers') renderChantiers();
+      console.log('[FB] Sync temps réel chantiers ✓');
+    });
+
+    // Listener techniciens
+    onSnapshot(collection(db, 'techniciens'), (snapshot) => {
+      snapshot.docChanges().forEach(change => {
+        const data = change.doc.data();
+        if (change.type === 'added' || change.type === 'modified') {
+          const idx = DB.techniciens.findIndex(t => t.id === data.id);
+          if (idx >= 0) DB.techniciens[idx] = data;
+          else DB.techniciens.push(data);
+        } else if (change.type === 'removed') {
+          DB.techniciens = DB.techniciens.filter(t => t.id !== data.id);
+        }
+      });
+      save();
+    });
+  }
+
+  // ─── PATCH saveChantier pour sauvegarder sur Firebase ───
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      // Sync initial
+      syncFromFirebase().then(() => startRealtimeSync());
+
+      // Patch saveChantier
+      const _orig = window.saveChantier;
+      window.saveChantier = async function(editId) {
+        _orig.apply(this, arguments);
+        // Sauvegarder le chantier sur Firebase
+        try {
+          const chantier = editId
+            ? DB.chantiers.find(c => c.id === editId)
+            : DB.chantiers[0];
+          if (chantier && window.FBDB) {
+            await setDoc(doc(db, 'chantiers', String(chantier.id)), {
+              ...chantier,
+              updatedAt: serverTimestamp()
+            });
+            console.log('[FB] Chantier sauvegardé:', chantier.nom);
+          }
+        } catch(e) { console.warn('[FB] Erreur save chantier:', e); }
+      };
+
+      // Patch saveTechnicien
+      const _origTech = window.saveTechnicien;
+      window.saveTechnicien = async function() {
+        _origTech.apply(this, arguments);
+        try {
+          const tech = DB.techniciens[DB.techniciens.length - 1];
+          if (tech && window.FBDB) {
+            await setDoc(doc(db, 'techniciens', String(tech.id)), {
+              ...tech,
+              updatedAt: serverTimestamp()
+            });
+            console.log('[FB] Technicien sauvegardé:', tech.nom);
+          }
+        } catch(e) { console.warn('[FB] Erreur save tech:', e); }
+      };
+
+      // Patch saveVehicule
+      const _origVeh = window.saveVehicule;
+      window.saveVehicule = async function() {
+        _origVeh.apply(this, arguments);
+        try {
+          const veh = DB.vehicules[DB.vehicules.length - 1];
+          if (veh && window.FBDB) {
+            await setDoc(doc(db, 'vehicules', String(veh.id)), {
+              ...veh,
+              updatedAt: serverTimestamp()
+            });
+            console.log('[FB] Véhicule sauvegardé:', veh.immat);
+          }
+        } catch(e) { console.warn('[FB] Erreur save veh:', e); }
+      };
+
+      // Indicateur de connexion Firebase dans la topbar
+      const tbRight = document.getElementById('tb-right') || document.querySelector('.tb-right');
+      if (tbRight) {
+        const fbBadge = document.createElement('span');
+        fbBadge.id = 'fb-badge';
+        fbBadge.title = 'Synchronisation Firebase active';
+        fbBadge.style.cssText = 'font-size:9px;padding:2px 6px;border-radius:10px;background:rgba(0,196,122,.2);color:#00C47A;font-weight:600;font-family:monospace';
+        fbBadge.textContent = '● SYNC';
+        tbRight.prepend(fbBadge);
+      }
+
+      console.log('[EGT Firebase] Patches actifs ✓');
+    }, 1000);
+  });
+</script>
 </body>
 </html>
