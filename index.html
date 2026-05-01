@@ -865,10 +865,13 @@ function loginFixe(loginRole){
   var defaults={directeur:{nom:'Direction',initiales:'DI'},assistante:{nom:'Administration',initiales:'AD'},chef:{nom:'Chef de chantier',initiales:'CC'}};
   var nom=pf.nom||defaults[loginRole].nom;
   var init=pf.initiales||defaults[loginRole].initiales;
-
-  // Vérifier si un PIN est configuré pour ce profil
-  if(DB.pins&&DB.pins[key]){
-    demanderPin(loginRole,key,init,nom);
+  // Directeur et Assistante : PIN obligatoire
+  if(loginRole==='directeur'||loginRole==='assistante'){
+    if(DB.pins&&DB.pins[key]){
+      demanderPin(loginRole,key,init,nom);
+    } else {
+      creerNouveauPin(loginRole,key,init,nom);
+    }
   } else {
     login(loginRole,init,nom);
   }
@@ -2024,6 +2027,10 @@ function renderDetailTab(tab){
   // ── DOCS ─────────────────────────────────────────────
   } else if(tab==='docs'){
     const fichiers=c.fichiers||[];
+        // ── Panneau OneDrive EGT ──
+    const _odConn = window.OD && window.OD.connected;
+    const _odPath = c.onedrivePath || '';
+    const _odPanel = `<div style="background:rgba(150,90,150,.1);border:1px solid rgba(150,90,150,.3);border-radius:10px;padding:12px;margin-bottom:14px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span style="font-size:20px">☁️</span><div><div style="font-size:13px;font-weight:700;color:var(--text)">OneDrive EGT</div><div style="font-size:10px;color:${_odConn?'var(--green)':'var(--text2)'};margin-top:2px">${_odConn?'● Connecté — '+((window.OD&&window.OD.account&&window.OD.account.username)||''):'○ Non connecté'}</div></div></div>${_odPath?`<div style="font-size:10px;color:var(--accent);font-family:monospace;padding:3px 8px;background:rgba(150,90,150,.1);border-radius:4px;margin-bottom:10px;word-break:break-all">📁 ${_odPath}</div>`:''}<div style="display:flex;gap:8px;flex-wrap:wrap"><button onclick="${_odConn?'odDisconnect()':'odConnect()'}" style="padding:8px 14px;background:${_odConn?'rgba(0,196,122,.2)':'var(--accent)'};color:${_odConn?'var(--green)':'#fff'};border:${_odConn?'1px solid var(--green)':'none'};border-radius:8px;font-size:12px;font-weight:700;cursor:pointer">${_odConn?'⛓️ Déconnecter':'☁️ Connecter OneDrive'}</button>${_odConn&&!_odPath?`<button onclick="odCreateChantierFolders(DB.chantiers.find(x=>x.id===${c.id})).then(()=>renderDetailTab('docs'))" style="padding:8px 12px;background:var(--bg3);color:var(--text);border:1px solid var(--line2);border-radius:8px;font-size:11px;cursor:pointer">📁 Créer dossier</button>`:''}</div></div>`;
     let html=`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
       <div style="font-size:10px;color:var(--accent);font-family:monospace;letter-spacing:1px;text-transform:uppercase">${cfg.icone} Docs chantier — ${c.donneur||'—'}</div>
       ${cfg.ongletsDFT?`<div style="font-size:9px;color:var(--g4);font-family:monospace">${cfg.ongletsDFT.length} onglets Excel</div>`:''}
@@ -2058,7 +2065,7 @@ function renderDetailTab(tab){
     if(perm('canEditChantier')||currentUser.role==='chef'||currentUser.role==='technicien'){
       html+=`<button class="upload-btn" style="margin-top:10px" onclick="addFichier()"><span style="font-size:18px">📎</span><span>Ajouter un document chantier</span></button>`;
     }
-    body.innerHTML=html;
+    body.innerHTML=_odPanel+html;
 
   // ── FRAIS ────────────────────────────────────────────
   } else if(tab==='frais'){
@@ -4391,6 +4398,12 @@ function supprimerChantier(id){
       DB.terrain=DB.terrain.filter(t=>t.chantierId!==id);
       save();closeDetail();renderChantiers();
       showNotif('Chantier supprimé','');
+      // Supprimer sur Firebase
+      if(window.EGT_DB){
+        import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js').then(({doc,deleteDoc})=>{
+          deleteDoc(doc(window.EGT_DB,'chantiers',String(id))).catch(e=>console.warn('[FB]',e));
+        });
+      }
     },true
   );
 }
@@ -5615,173 +5628,264 @@ renderCompanyRegistry();
 
 <input type="file" id="photoCaptureInput" accept="image/*" capture="environment" style="display:none" onchange="handlePhotoCapture(this)">
 
-<!-- ═══════════════════════════════════════════════════════
-     MODULE FIREBASE EGT — Base de données partagée en temps réel
-     ═══════════════════════════════════════════════════════ -->
-<script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-  import { getFirestore, collection, doc, setDoc, getDoc, getDocs, onSnapshot, deleteDoc, query, orderBy, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDLweNIl7Vc1a_SUrKiWUriMKTc9MEkex0",
-    authDomain: "egt-app-bb6c0.firebaseapp.com",
-    projectId: "egt-app-bb6c0",
-    storageBucket: "egt-app-bb6c0.firebasestorage.app",
-    messagingSenderId: "211765326412",
-    appId: "1:211765326412:web:ecef15d9ee892310d4fae9"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  window.FBDB = db;
-  window.FB = { collection, doc, setDoc, getDoc, getDocs, onSnapshot, deleteDoc, query, orderBy, serverTimestamp };
-  window.firebaseReady = true;
-  console.log('[EGT Firebase] Connecté ✓');
-
-  // ─── SYNC : Charger depuis Firebase au démarrage ───
-  async function syncFromFirebase() {
-    try {
-      // Chantiers
-      const chantiersSnap = await getDocs(collection(db, 'chantiers'));
-      const chantiers = [];
-      chantiersSnap.forEach(d => chantiers.push(d.data()));
-      if (chantiers.length > 0) {
-        DB.chantiers = chantiers;
-        console.log('[FB] Chantiers chargés:', chantiers.length);
-      }
-
-      // Techniciens
-      const techSnap = await getDocs(collection(db, 'techniciens'));
-      const techs = [];
-      techSnap.forEach(d => techs.push(d.data()));
-      if (techs.length > 0) {
-        DB.techniciens = techs;
-        console.log('[FB] Techniciens chargés:', techs.length);
-      }
-
-      // Véhicules
-      const vehSnap = await getDocs(collection(db, 'vehicules'));
-      const vehs = [];
-      vehSnap.forEach(d => vehs.push(d.data()));
-      if (vehs.length > 0) {
-        DB.vehicules = vehs;
-        console.log('[FB] Véhicules chargés:', vehs.length);
-      }
-
-      save();
-      if (window.currentScreen) renderScreen(window.currentScreen);
-      showNotif('Données synchronisées ✓', 'success');
-    } catch(e) {
-      console.warn('[FB] Erreur sync:', e);
-    }
+<script>
+// ── Fonctions PIN (accessibles globalement) ──────
+function creerNouveauPin(loginRole, key, init, nom) {
+  var overlay = document.getElementById('pinOverlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'pinOverlay';
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px';
+    document.body.appendChild(overlay);
   }
+  overlay.style.display = 'flex';
+  overlay.innerHTML = '<div style="background:#2A0A2A;border:1px solid rgba(150,90,150,.4);border-radius:16px;padding:28px 24px;width:100%;max-width:300px;text-align:center">'
+    + '<div style="font-size:40px;margin-bottom:12px">\uD83D\uDD12</div>'
+    + '<div style="font-family:Rajdhani,sans-serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:6px">Cr\u00E9er votre PIN</div>'
+    + '<div style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:20px">Premi\u00E8re connexion — choisissez un code PIN \u00E0 4 chiffres.</div>'
+    + '<input id="pinC1" type="password" inputmode="numeric" maxlength="4" placeholder="Nouveau PIN" style="width:100%;padding:13px;text-align:center;font-size:26px;letter-spacing:10px;background:#1E001E;border:1px solid rgba(150,90,150,.4);border-radius:10px;color:#fff;margin-bottom:10px;outline:none;font-family:monospace">'
+    + '<input id="pinC2" type="password" inputmode="numeric" maxlength="4" placeholder="Confirmer" style="width:100%;padding:13px;text-align:center;font-size:26px;letter-spacing:10px;background:#1E001E;border:1px solid rgba(150,90,150,.4);border-radius:10px;color:#fff;margin-bottom:14px;outline:none;font-family:monospace">'
+    + '<div id="pinCErr" style="color:#FF4455;font-size:12px;min-height:16px;margin-bottom:12px"></div>'
+    + '<button onclick="validerNouveauPin(\''+loginRole+'\',\''+key+'\',\''+init+'\',\''+nom+'\')" style="width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:10px">Cr\u00E9er le PIN \u2713</button>'
+    + '<button onclick="document.getElementById(\'pinOverlay\').style.display=\'none\'" style="width:100%;padding:10px;background:transparent;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.1);border-radius:10px;font-size:13px;cursor:pointer">Annuler</button>'
+    + '</div>';
+  setTimeout(function(){ var el=document.getElementById('pinC1'); if(el) el.focus(); }, 100);
+}
 
-  // ─── LISTENER TEMPS RÉEL sur les chantiers ───
-  function startRealtimeSync() {
-    const q = query(collection(db, 'chantiers'), orderBy('updatedAt', 'desc'));
-    onSnapshot(q, (snapshot) => {
-      snapshot.docChanges().forEach(change => {
-        const data = change.doc.data();
-        if (change.type === 'added' || change.type === 'modified') {
-          const idx = DB.chantiers.findIndex(c => c.id === data.id);
-          if (idx >= 0) DB.chantiers[idx] = data;
-          else DB.chantiers.unshift(data);
-        } else if (change.type === 'removed') {
-          DB.chantiers = DB.chantiers.filter(c => c.id !== data.id);
-        }
-      });
-      save();
-      if (window.currentScreen === 'chantiers') renderChantiers();
-      console.log('[FB] Sync temps réel chantiers ✓');
-    });
-
-    // Listener techniciens
-    onSnapshot(collection(db, 'techniciens'), (snapshot) => {
-      snapshot.docChanges().forEach(change => {
-        const data = change.doc.data();
-        if (change.type === 'added' || change.type === 'modified') {
-          const idx = DB.techniciens.findIndex(t => t.id === data.id);
-          if (idx >= 0) DB.techniciens[idx] = data;
-          else DB.techniciens.push(data);
-        } else if (change.type === 'removed') {
-          DB.techniciens = DB.techniciens.filter(t => t.id !== data.id);
-        }
-      });
-      save();
-    });
+function validerNouveauPin(loginRole, key, init, nom) {
+  var p1 = document.getElementById('pinC1').value.trim();
+  var p2 = document.getElementById('pinC2').value.trim();
+  var err = document.getElementById('pinCErr');
+  if (!/^[0-9]{4}$/.test(p1)) { err.textContent = 'Le PIN doit contenir exactement 4 chiffres.'; return; }
+  if (p1 !== p2) { err.textContent = 'Les deux codes ne correspondent pas.'; return; }
+  if (!DB.pins) DB.pins = {};
+  DB.pins[key] = p1;
+  save();
+  // Sauvegarder sur Firebase si disponible
+  if (window.fbSave) {
+    window.fbSave('config_pins', 'pins', DB.pins);
   }
-
-  // ─── PATCH saveChantier pour sauvegarder sur Firebase ───
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      // Sync initial
-      syncFromFirebase().then(() => startRealtimeSync());
-
-      // Patch saveChantier
-      const _orig = window.saveChantier;
-      window.saveChantier = async function(editId) {
-        _orig.apply(this, arguments);
-        // Sauvegarder le chantier sur Firebase
-        try {
-          const chantier = editId
-            ? DB.chantiers.find(c => c.id === editId)
-            : DB.chantiers[0];
-          if (chantier && window.FBDB) {
-            await setDoc(doc(db, 'chantiers', String(chantier.id)), {
-              ...chantier,
-              updatedAt: serverTimestamp()
-            });
-            console.log('[FB] Chantier sauvegardé:', chantier.nom);
-          }
-        } catch(e) { console.warn('[FB] Erreur save chantier:', e); }
-      };
-
-      // Patch saveTechnicien
-      const _origTech = window.saveTechnicien;
-      window.saveTechnicien = async function() {
-        _origTech.apply(this, arguments);
-        try {
-          const tech = DB.techniciens[DB.techniciens.length - 1];
-          if (tech && window.FBDB) {
-            await setDoc(doc(db, 'techniciens', String(tech.id)), {
-              ...tech,
-              updatedAt: serverTimestamp()
-            });
-            console.log('[FB] Technicien sauvegardé:', tech.nom);
-          }
-        } catch(e) { console.warn('[FB] Erreur save tech:', e); }
-      };
-
-      // Patch saveVehicule
-      const _origVeh = window.saveVehicule;
-      window.saveVehicule = async function() {
-        _origVeh.apply(this, arguments);
-        try {
-          const veh = DB.vehicules[DB.vehicules.length - 1];
-          if (veh && window.FBDB) {
-            await setDoc(doc(db, 'vehicules', String(veh.id)), {
-              ...veh,
-              updatedAt: serverTimestamp()
-            });
-            console.log('[FB] Véhicule sauvegardé:', veh.immat);
-          }
-        } catch(e) { console.warn('[FB] Erreur save veh:', e); }
-      };
-
-      // Indicateur de connexion Firebase dans la topbar
-      const tbRight = document.getElementById('tb-right') || document.querySelector('.tb-right');
-      if (tbRight) {
-        const fbBadge = document.createElement('span');
-        fbBadge.id = 'fb-badge';
-        fbBadge.title = 'Synchronisation Firebase active';
-        fbBadge.style.cssText = 'font-size:9px;padding:2px 6px;border-radius:10px;background:rgba(0,196,122,.2);color:#00C47A;font-weight:600;font-family:monospace';
-        fbBadge.textContent = '● SYNC';
-        tbRight.prepend(fbBadge);
-      }
-
-      console.log('[EGT Firebase] Patches actifs ✓');
-    }, 1000);
-  });
+  document.getElementById('pinOverlay').style.display = 'none';
+  if (window.showNotif) showNotif('PIN cr\u00E9\u00E9 avec succ\u00E8s \u2713', 'success');
+  login(loginRole, init, nom);
+}
 </script>
+
+<!-- ═══════════════════════════════════════════
+     MODULE FIREBASE EGT + PIN SÉCURISÉ
+     ═══════════════════════════════════════════ -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getFirestore, collection, doc, setDoc, getDoc, getDocs, onSnapshot, deleteDoc, query, orderBy, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyDLweNIl7Vc1a_SUrKiWUriMKTc9MEkex0",
+  authDomain: "egt-app-bb6c0.firebaseapp.com",
+  projectId: "egt-app-bb6c0",
+  storageBucket: "egt-app-bb6c0.firebasestorage.app",
+  messagingSenderId: "211765326412",
+  appId: "1:211765326412:web:ecef15d9ee892310d4fae9"
+};
+
+const fbApp = initializeApp(FIREBASE_CONFIG);
+const db = getFirestore(fbApp);
+window.EGT_DB = db;
+
+// ── Fonctions globales exposées ──────────────────
+window.fbSave = async (col, id, data) => {
+  try {
+    await setDoc(doc(db, col, String(id)), { ...data, _updatedAt: serverTimestamp() });
+  } catch(e) { console.warn('[FB] Save error:', e); }
+};
+
+window.fbDelete = async (col, id) => {
+  try {
+    await deleteDoc(doc(db, col, String(id)));
+  } catch(e) { console.warn('[FB] Delete error:', e); }
+};
+
+// ── Sync initiale depuis Firebase ────────────────
+async function syncInit() {
+  try {
+    // Chantiers
+    const snap = await getDocs(collection(db, 'chantiers'));
+    if (!snap.empty) {
+      const items = [];
+      snap.forEach(d => { const v = d.data(); delete v._updatedAt; items.push(v); });
+      DB.chantiers = items;
+      console.log('[FB] Chantiers:', items.length);
+    }
+    // Techniciens
+    const snapT = await getDocs(collection(db, 'techniciens'));
+    if (!snapT.empty) {
+      const items = [];
+      snapT.forEach(d => { const v = d.data(); delete v._updatedAt; items.push(v); });
+      DB.techniciens = items;
+    }
+    // Config PIN
+    const pinDoc = await getDoc(doc(db, 'config', 'pins'));
+    if (pinDoc.exists()) {
+      DB.pins = pinDoc.data();
+      console.log('[FB] PINs chargés');
+    }
+    save();
+    if (window.renderChantiers) renderChantiers();
+    showFBBadge('● SYNC', true);
+  } catch(e) {
+    console.warn('[FB] Sync init error:', e);
+    showFBBadge('○ LOCAL', false);
+  }
+}
+
+// ── Listeners temps réel ─────────────────────────
+function startListeners() {
+  // Chantiers temps réel
+  onSnapshot(collection(db, 'chantiers'), snapshot => {
+    let changed = false;
+    snapshot.docChanges().forEach(change => {
+      const data = change.doc.data();
+      delete data._updatedAt;
+      if (change.type === 'added' || change.type === 'modified') {
+        const idx = DB.chantiers.findIndex(c => c.id === data.id);
+        if (idx >= 0) { DB.chantiers[idx] = data; }
+        else { DB.chantiers.unshift(data); }
+        changed = true;
+      } else if (change.type === 'removed') {
+        DB.chantiers = DB.chantiers.filter(c => c.id !== data.id);
+        changed = true;
+      }
+    });
+    if (changed) {
+      save();
+      if (window.currentScreen === 'chantiers' && window.renderChantiers) renderChantiers();
+    }
+  });
+
+  // Techniciens temps réel
+  onSnapshot(collection(db, 'techniciens'), snapshot => {
+    snapshot.docChanges().forEach(change => {
+      const data = change.doc.data();
+      delete data._updatedAt;
+      if (change.type === 'added' || change.type === 'modified') {
+        const idx = DB.techniciens.findIndex(t => t.id === data.id);
+        if (idx >= 0) DB.techniciens[idx] = data;
+        else DB.techniciens.push(data);
+      } else if (change.type === 'removed') {
+        DB.techniciens = DB.techniciens.filter(t => t.id !== data.id);
+      }
+    });
+    save();
+  });
+}
+
+// ── Badge SYNC dans topbar ────────────────────────
+function showFBBadge(text, ok) {
+  let badge = document.getElementById('fb-sync-badge');
+  if (!badge) {
+    badge = document.createElement('span');
+    badge.id = 'fb-sync-badge';
+    badge.style.cssText = 'font-size:9px;padding:2px 7px;border-radius:10px;font-weight:700;font-family:monospace;cursor:default';
+    const tbRight = document.querySelector('.tb-right');
+    if (tbRight) tbRight.prepend(badge);
+  }
+  badge.textContent = text;
+  badge.style.background = ok ? 'rgba(0,196,122,.2)' : 'rgba(150,90,150,.2)';
+  badge.style.color = ok ? 'var(--green)' : 'var(--accent)';
+}
+
+// ── Patch saveChantier ────────────────────────────
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    // Patch saveChantier
+    const _origSC = window.saveChantier;
+    window.saveChantier = async function(editId) {
+      _origSC.apply(this, arguments);
+      const c = editId ? DB.chantiers.find(x => x.id === editId) : DB.chantiers[0];
+      if (c) await window.fbSave('chantiers', c.id, c);
+    };
+
+    // Patch saveTechnicien
+    const _origST = window.saveTechnicien;
+    if (_origST) window.saveTechnicien = async function() {
+      _origST.apply(this, arguments);
+      const t = DB.techniciens[DB.techniciens.length - 1];
+      if (t) await window.fbSave('techniciens', t.id, t);
+    };
+
+    // Patch saveEditTechnicien
+    const _origSET = window.saveEditTechnicien;
+    if (_origSET) window.saveEditTechnicien = async function(tId) {
+      _origSET.apply(this, arguments);
+      const t = DB.techniciens.find(x => x.id === tId);
+      if (t) await window.fbSave('techniciens', tId, t);
+    };
+
+    // Démarrer la sync
+    syncInit().then(() => startListeners());
+    showFBBadge('⟳ SYNC...', true);
+
+    console.log('[EGT Firebase] Opérationnel ✓');
+  }, 800);
+});
+
+// ─────────────────────────────────────────────────
+// MODULE PIN — Création et vérification sécurisée
+// ─────────────────────────────────────────────────
+
+// Créer PIN à la première connexion
+window.creerNouveauPin = function(loginRole, key, init, nom) {
+  let overlay = document.getElementById('pinOverlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'pinOverlay';
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px';
+    document.body.appendChild(overlay);
+  }
+  overlay.style.display = 'flex';
+  overlay.innerHTML = `
+    <div style="background:#2A0A2A;border:1px solid rgba(150,90,150,.4);border-radius:16px;padding:28px 24px;width:100%;max-width:300px;text-align:center">
+      <div style="font-size:40px;margin-bottom:12px">🔒</div>
+      <div style="font-family:Rajdhani,sans-serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:6px">Créer votre PIN</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:20px">Première connexion en tant que <strong style="color:var(--accent)">${nom}</strong>.<br>Choisissez un code PIN à 4 chiffres.</div>
+      <input id="pinC1" type="password" inputmode="numeric" maxlength="4" placeholder="Nouveau PIN" autocomplete="new-password"
+        style="width:100%;padding:13px;text-align:center;font-size:26px;letter-spacing:10px;background:#1E001E;border:1px solid rgba(150,90,150,.4);border-radius:10px;color:#fff;margin-bottom:10px;outline:none;font-family:monospace">
+      <input id="pinC2" type="password" inputmode="numeric" maxlength="4" placeholder="Confirmer" autocomplete="new-password"
+        style="width:100%;padding:13px;text-align:center;font-size:26px;letter-spacing:10px;background:#1E001E;border:1px solid rgba(150,90,150,.4);border-radius:10px;color:#fff;margin-bottom:14px;outline:none;font-family:monospace">
+      <div id="pinCErr" style="color:#FF4455;font-size:12px;min-height:16px;margin-bottom:12px"></div>
+      <button onclick="window._validerNouveauPin('${loginRole}','${key}','${init}','${nom}')"
+        style="width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:10px">
+        Créer le PIN ✓
+      </button>
+      <button onclick="document.getElementById('pinOverlay').style.display='none'"
+        style="width:100%;padding:10px;background:transparent;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.1);border-radius:10px;font-size:13px;cursor:pointer">
+        Annuler
+      </button>
+    </div>`;
+  setTimeout(() => document.getElementById('pinC1')?.focus(), 100);
+};
+
+window._validerNouveauPin = async function(loginRole, key, init, nom) {
+  const p1 = document.getElementById('pinC1').value.trim();
+  const p2 = document.getElementById('pinC2').value.trim();
+  const err = document.getElementById('pinCErr');
+  if (!/^[0-9]{4}$/.test(p1)) { err.textContent = 'Le PIN doit contenir exactement 4 chiffres.'; return; }
+  if (p1 !== p2) { err.textContent = 'Les deux codes ne correspondent pas.'; return; }
+  if (!DB.pins) DB.pins = {};
+  DB.pins[key] = p1;
+  save();
+  // Sauvegarder sur Firebase
+  if (window.EGT_DB) {
+    try {
+      const { doc: fbDoc, setDoc: fbSet } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
+      await fbSet(fbDoc(window.EGT_DB, 'config', 'pins'), DB.pins);
+    } catch(e) {}
+  }
+  document.getElementById('pinOverlay').style.display = 'none';
+  if (window.showNotif) showNotif('PIN créé avec succès ✓', 'success');
+  login(loginRole, init, nom);
+};
+</script>
+
 </body>
 </html>
